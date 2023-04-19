@@ -1,0 +1,72 @@
+import re
+
+def get_input(message):
+    """
+    Utility function to get input from user with message prompt
+    """
+    return input(message)
+
+def count_vowels_consonants(string, compare_by):
+    """
+    Function to count the number of vowels or consonants in a given string
+    """
+    vowels = 'AEIOUaeiou'
+    consonants = 'BCDFGHJKLMNPQRSTVWXYZbcdfghjklmnpqrstvwxyz'
+    count = 0
+    positions = []
+    for i, char in enumerate(string):
+        if compare_by == 'Vowels' and char in vowels:
+            count += 1
+            positions.append(i+1)
+        elif compare_by == 'Consonants' and char in consonants:
+            count += 1
+            positions.append(i+1)
+    return count, positions
+
+def main():
+    """
+    Main function to handle the user interface
+    """
+    num_strings = 0
+    while True:
+        num_strings = int(get_input('Enter the number of strings to compare (max 5): '))
+        if num_strings < 2:
+            print('Please enter at least 2 strings.')
+        elif num_strings > 5:
+            print('Please enter a number less than or equal to 5.')
+        else:
+            break
+    
+    strings = []
+    for i in range(num_strings):
+        while True:
+            string = get_input(f'Enter string {i+1}: ')
+            if not re.match('^[a-zA-Z]+$', string):
+                print('Please enter only alphabetic characters.')
+            else:
+                strings.append(string)
+                break
+    
+    print('The entered strings are:')
+    for i, string in enumerate(strings):
+        print(f'{i+1}. {string}')
+    
+    while True:
+        compare_by = get_input('Do you want to compare by Vowels or Consonants? ')
+        if compare_by not in ['Vowels', 'Consonants']:
+            print('Please enter either Vowels or Consonants.')
+        else:
+            break
+    
+    for i, string in enumerate(strings):
+        count, positions = count_vowels_consonants(string, compare_by)
+        if count == 0:
+            print(f'String {i+1} does not contain any {compare_by}.')
+        else:
+            print(f'String {i+1} contains {count} {compare_by} at positions {positions}.')
+
+if __name__ == '__main__':
+    try:
+        main()
+    except Exception as e:
+        print(f'An error occurred: {str(e)}. Exiting gracefully.')
