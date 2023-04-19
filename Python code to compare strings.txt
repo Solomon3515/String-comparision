@@ -1,15 +1,13 @@
 import re
 
 def get_input(message):
-    """
-    Utility function to get input from user with message prompt
-    """
+    
+  
+   
     return input(message)
 
 def count_vowels_consonants(string, compare_by):
-    """
-    Function to count the number of vowels or consonants in a given string
-    """
+   
     vowels = 'AEIOUaeiou'
     consonants = 'BCDFGHJKLMNPQRSTVWXYZbcdfghjklmnpqrstvwxyz'
     count = 0
@@ -24,9 +22,7 @@ def count_vowels_consonants(string, compare_by):
     return count, positions
 
 def main():
-    """
-    Main function to handle the user interface
-    """
+   
     num_strings = 0
     while True:
         num_strings = int(get_input('Enter the number of strings to compare (max 5): '))
